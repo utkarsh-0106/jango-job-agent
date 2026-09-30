@@ -2,6 +2,14 @@
 
 A Chrome Manifest V3 extension for autofilling job application forms.
 
+
+## 🎥 Demo
+
+[![Jango Job Agent Demo](https://img.youtube.com/vi/8iNf6f4ubqk/maxresdefault.jpg)](https://youtu.be/8iNf6f4ubqk)
+
+**[▶ Watch the Jango Job Agent Demo](https://youtu.be/8iNf6f4ubqk)**
+
+
 ## Architecture
 
 ```
