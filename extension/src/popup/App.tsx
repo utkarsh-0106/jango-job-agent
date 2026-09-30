@@ -4,15 +4,53 @@ import { sendMessage, GetProfileMessage, SetProfileMessage, AutofillMessage } fr
 import { createEmptyProfile } from '../profile';
 
 interface FormData {
-  personal: { firstName: string; lastName: string; fullName: string };
+  personal: {
+    firstName: string;
+    lastName: string;
+    fullName: string;
+    dateOfBirth: string;
+    currentLocation: string;
+  };
   contact: { email: string; phone: string; city: string; state: string; country: string; zipCode: string };
   links: { linkedin: string; github: string; portfolio: string; website: string };
+  education: {
+    institution: string;
+    degree: string;
+    field: string;
+    startDate: string;
+    endDate: string;
+    currentStudent: boolean;
+    cgpa: string;
+    percentage: string;
+    graduationYear: string;
+    relevantCoursework: string;
+    academicAchievements: string;
+  };
 }
 
 const INITIAL_FORM: FormData = {
-  personal: { firstName: '', lastName: '', fullName: '' },
+  personal: {
+    firstName: '',
+    lastName: '',
+    fullName: '',
+    dateOfBirth: '',
+    currentLocation: '',
+  },
   contact: { email: '', phone: '', city: '', state: '', country: '', zipCode: '' },
   links: { linkedin: '', github: '', portfolio: '', website: '' },
+  education: {
+    institution: '',
+    degree: '',
+    field: '',
+    startDate: '',
+    endDate: '',
+    currentStudent: false,
+    cgpa: '',
+    percentage: '',
+    graduationYear: '',
+    relevantCoursework: '',
+    academicAchievements: '',
+  },
 };
 
 export function App() {
@@ -40,9 +78,28 @@ export function App() {
 
   function profileToForm(p: Profile): FormData {
     return {
-      personal: { firstName: p.personal.firstName, lastName: p.personal.lastName, fullName: p.personal.fullName },
+      personal: {
+        firstName: p.personal.firstName,
+        lastName: p.personal.lastName,
+        fullName: p.personal.fullName,
+        dateOfBirth: p.personal.dateOfBirth,
+        currentLocation: p.personal.currentLocation,
+      },
       contact: { email: p.contact.email, phone: p.contact.phone, city: p.contact.city, state: p.contact.state, country: p.contact.country, zipCode: p.contact.zipCode },
       links: { linkedin: p.links.linkedin, github: p.links.github, portfolio: p.links.portfolio, website: p.links.website },
+      education: {
+        institution: p.education[0]?.institution ?? '',
+        degree: p.education[0]?.degree ?? '',
+        field: p.education[0]?.field ?? '',
+        startDate: p.education[0]?.startDate ?? '',
+        endDate: p.education[0]?.endDate ?? '',
+        currentStudent: p.education[0]?.currentStudent ?? false,
+        cgpa: p.education[0]?.cgpa ?? '',
+        percentage: p.education[0]?.percentage ?? '',
+        graduationYear: p.education[0]?.graduationYear ?? '',
+        relevantCoursework: p.education[0]?.relevantCoursework ?? '',
+        academicAchievements: p.education[0]?.academicAchievements ?? '',
+      },
     };
   }
 
@@ -50,9 +107,30 @@ export function App() {
     const base = profile || createEmptyProfile();
     return {
       ...base,
-      personal: { firstName: f.personal.firstName, lastName: f.personal.lastName, fullName: f.personal.fullName },
+      personal: {
+        firstName: f.personal.firstName,
+        lastName: f.personal.lastName,
+        fullName: f.personal.fullName,
+        dateOfBirth: f.personal.dateOfBirth,
+        currentLocation: f.personal.currentLocation,
+      },
       contact: { email: f.contact.email, phone: f.contact.phone, city: f.contact.city, state: f.contact.state, country: f.contact.country, zipCode: f.contact.zipCode },
       links: { linkedin: f.links.linkedin, github: f.links.github, portfolio: f.links.portfolio, website: f.links.website },
+      education: [
+        {
+          institution: f.education.institution,
+          degree: f.education.degree,
+          field: f.education.field,
+          startDate: f.education.startDate,
+          endDate: f.education.endDate,
+          currentStudent: f.education.currentStudent,
+          cgpa: f.education.cgpa,
+          percentage: f.education.percentage,
+          graduationYear: f.education.graduationYear,
+          relevantCoursework: f.education.relevantCoursework,
+          academicAchievements: f.education.academicAchievements,
+        },
+      ],
     };
   }
 
@@ -163,6 +241,24 @@ export function App() {
               placeholder="John Doe"
             />
           </div>
+          <div className="field-row">
+            <div className="field-group">
+              <label>Date of Birth</label>
+              <input
+                type="date"
+                value={form.personal.dateOfBirth}
+                onChange={e => setForm({ ...form, personal: { ...form.personal, dateOfBirth: e.target.value } })}
+              />
+            </div>
+            <div className="field-group">
+              <label>Current Location</label>
+              <input
+                value={form.personal.currentLocation}
+                onChange={e => setForm({ ...form, personal: { ...form.personal, currentLocation: e.target.value } })}
+                placeholder="Delhi NCR"
+              />
+            </div>
+          </div>
           <div className="field-group">
             <label>Email</label>
             <input
@@ -253,6 +349,124 @@ export function App() {
               placeholder="https://johndoe.com"
             />
           </div>
+
+          <div className="section-title" style={{ marginTop: '16px' }}>Education</div>
+
+          <div className="field-group">
+            <label>Institution</label>
+            <input
+              value={form.education.institution}
+              onChange={e => setForm({ ...form, education: { ...form.education, institution: e.target.value } })}
+              placeholder="University / College"
+            />
+          </div>
+
+          <div className="field-row">
+            <div className="field-group">
+              <label>Degree</label>
+              <input
+                value={form.education.degree}
+                onChange={e => setForm({ ...form, education: { ...form.education, degree: e.target.value } })}
+                placeholder="B.Tech"
+              />
+            </div>
+            <div className="field-group">
+              <label>Field of Study</label>
+              <input
+                value={form.education.field}
+                onChange={e => setForm({ ...form, education: { ...form.education, field: e.target.value } })}
+                placeholder="Computer Science"
+              />
+            </div>
+          </div>
+
+          <div className="field-row">
+            <div className="field-group">
+              <label>Start Date</label>
+              <input
+                type="date"
+                value={form.education.startDate}
+                onChange={e => setForm({ ...form, education: { ...form.education, startDate: e.target.value } })}
+              />
+            </div>
+            <div className="field-group">
+              <label>End Date</label>
+              <input
+                type="date"
+                value={form.education.endDate}
+                onChange={e => setForm({ ...form, education: { ...form.education, endDate: e.target.value } })}
+                disabled={form.education.currentStudent}
+              />
+            </div>
+          </div>
+
+          <label className="field-checkbox">
+            <input
+              type="checkbox"
+              checked={form.education.currentStudent}
+              onChange={e => setForm({
+                ...form,
+                education: {
+                  ...form.education,
+                  currentStudent: e.target.checked,
+                  endDate: e.target.checked ? '' : form.education.endDate,
+                },
+              })}
+            />
+            <span>Currently a student</span>
+          </label>
+
+          <div className="field-row">
+            <div className="field-group">
+              <label>CGPA</label>
+              <input
+                type="text"
+                value={form.education.cgpa}
+                onChange={e => setForm({ ...form, education: { ...form.education, cgpa: e.target.value } })}
+                placeholder="8.5"
+              />
+            </div>
+            <div className="field-group">
+              <label>Percentage</label>
+              <input
+                type="text"
+                value={form.education.percentage}
+                onChange={e => setForm({ ...form, education: { ...form.education, percentage: e.target.value } })}
+                placeholder="85%"
+              />
+            </div>
+          </div>
+
+          <div className="field-group">
+            <label>Graduation Year</label>
+            <input
+              type="text"
+              value={form.education.graduationYear}
+              onChange={e => setForm({ ...form, education: { ...form.education, graduationYear: e.target.value } })}
+              placeholder="2027"
+            />
+          </div>
+
+          <div className="field-group">
+            <label>Relevant Coursework</label>
+            <textarea
+              value={form.education.relevantCoursework}
+              onChange={e => setForm({ ...form, education: { ...form.education, relevantCoursework: e.target.value } })}
+              placeholder="Data Structures, DBMS, Operating Systems, Computer Networks"
+              rows={3}
+            />
+          </div>
+
+          <div className="field-group">
+            <label>Academic Achievements</label>
+            <textarea
+              value={form.education.academicAchievements}
+              onChange={e => setForm({ ...form, education: { ...form.education, academicAchievements: e.target.value } })}
+              placeholder="Academic awards, scholarships, rankings, achievements..."
+              rows={3}
+            />
+          </div>
+
           <button className="btn btn-primary" onClick={handleSave} disabled={loading}>
             {loading ? 'Saving...' : 'Save Profile'}
           </button>

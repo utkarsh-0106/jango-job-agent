@@ -250,6 +250,24 @@ function detectFieldsInPage(): {
     return null;
   }
 
+  function findGoogleFormQuestion(element: HTMLElement): string | null {
+    let current: HTMLElement | null = element;
+
+    for (let level = 0; level < 10 && current; level++, current = current.parentElement) {
+      const dataParams = current.getAttribute('data-params');
+
+      if (!dataParams) continue;
+
+      const match = dataParams.match(/\[\s*\d+\s*,\s*"([^"]+)"/);
+
+      if (match?.[1]) {
+        return match[1];
+      }
+    }
+
+    return null;
+  }
+
   function extractSignals(element: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement): ClassificationSignal[] {
     const signals: ClassificationSignal[] = [];
     
@@ -271,6 +289,9 @@ function detectFieldsInPage(): {
     const label = findLabel(element);
     if (label) addSignal('label', label, 0.9);
     
+    const googleFormQuestion = findGoogleFormQuestion(element);
+    if (googleFormQuestion) addSignal('label', googleFormQuestion, 1.1);
+
     const surrounding = getSurroundingText(element);
     if (surrounding) addSignal('surrounding-text', surrounding, 0.4);
     
@@ -509,12 +530,34 @@ function autofillInPage(profile: Profile, minConfidence: number = 0.5): Autofill
   const normalize = (value: string): string =>
     value.toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
 
+  const extractGoogleFormQuestionText = (
+    element: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  ): string => {
+    let current: HTMLElement | null = element;
+
+    for (let level = 0; level < 10 && current; level++, current = current.parentElement) {
+      const dataParams = current.getAttribute('data-params');
+
+      if (!dataParams) continue;
+
+      const match = dataParams.match(/\[\s*\d+\s*,\s*"([^"]+)"/);
+
+      if (match?.[1]) {
+        return match[1];
+      }
+    }
+
+    return '';
+  };
+
   const classify = (
     element: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
   ): { fieldType: SafeFieldType; confidence: number } => {
     const label = element.id
       ? document.querySelector(`label[for="${CSS.escape(element.id)}"]`)?.textContent ?? ''
       : element.closest('label')?.textContent ?? '';
+
+    const googleFormQuestion = extractGoogleFormQuestionText(element);
 
     const text = [
       element.getAttribute('name') ?? '',
@@ -524,6 +567,7 @@ function autofillInPage(profile: Profile, minConfidence: number = 0.5): Autofill
       element.getAttribute('autocomplete') ?? '',
       element.getAttribute('type') ?? '',
       label,
+      googleFormQuestion,
     ]
       .map(normalize)
       .filter(Boolean)

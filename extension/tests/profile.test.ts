@@ -52,7 +52,13 @@ describe('MemoryProfileStore', () => {
   let store: ReturnType<typeof createProfileStore>;
   const testProfile: Profile = {
     ...DEFAULT_PROFILE,
-    personal: { firstName: 'Test', lastName: 'User', fullName: 'Test User' },
+    personal: {
+      firstName: 'Test',
+      lastName: 'User',
+      fullName: 'Test User',
+      dateOfBirth: '',
+      currentLocation: '',
+    },
     contact: { email: 'test@example.com', phone: '', city: '', state: '', country: '', zipCode: '' },
     links: { linkedin: '', github: '', portfolio: '', website: '' },
     education: [],

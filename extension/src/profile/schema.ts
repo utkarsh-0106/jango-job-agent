@@ -5,6 +5,8 @@ export const DEFAULT_PROFILE: Profile = {
     firstName: '',
     lastName: '',
     fullName: '',
+    dateOfBirth: '',
+    currentLocation: '',
   },
   contact: {
     email: '',

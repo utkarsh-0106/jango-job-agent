@@ -37,6 +37,8 @@ export interface Profile {
     firstName: string;
     lastName: string;
     fullName: string;
+    dateOfBirth: string;
+    currentLocation: string;
   };
   contact: {
     email: string;
@@ -58,6 +60,12 @@ export interface Profile {
     field: string;
     startDate: string;
     endDate: string;
+    currentStudent: boolean;
+    cgpa: string;
+    percentage: string;
+    graduationYear: string;
+    relevantCoursework: string;
+    academicAchievements: string;
   }>;
   skills: string[];
   experience: Array<{
