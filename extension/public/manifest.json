@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Jango Job Agent",
+  "version": "0.1.0",
+  "description": "Autofill job application forms with your profile",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Jango Job Agent"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["popup/index.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

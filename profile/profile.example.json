@@ -1,0 +1,65 @@
+{
+  "personal": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "fullName": "John Doe"
+  },
+  "contact": {
+    "email": "john.doe@example.com",
+    "phone": "+1 (555) 123-4567",
+    "city": "San Francisco",
+    "state": "CA",
+    "country": "USA",
+    "zipCode": "94105"
+  },
+  "links": {
+    "linkedin": "https://linkedin.com/in/johndoe",
+    "github": "https://github.com/johndoe",
+    "portfolio": "https://johndoe.dev",
+    "website": "https://johndoe.com"
+  },
+  "education": [
+    {
+      "institution": "Stanford University",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "startDate": "2018-09",
+      "endDate": "2022-06"
+    }
+  ],
+  "skills": [
+    "TypeScript",
+    "React",
+    "Node.js",
+    "Python",
+    "AWS",
+    "Docker",
+    "PostgreSQL"
+  ],
+  "experience": [
+    {
+      "company": "TechCorp Inc.",
+      "title": "Software Engineer",
+      "startDate": "2022-07",
+      "endDate": "present",
+      "description": "Building scalable web applications using React and TypeScript. Led migration to microservices architecture."
+    }
+  ],
+  "projects": [
+    {
+      "name": "Open Source CLI Tool",
+      "description": "A command-line tool for automating deployment workflows",
+      "url": "https://github.com/johndoe/cli-tool"
+    }
+  ],
+  "preferences": {
+    "willingToRelocate": true,
+    "remotePreference": "remote",
+    "noticePeriod": "2 weeks"
+  },
+  "answers": {
+    "visaSponsorship": "No",
+    "salaryExpectation": "$150,000 - $180,000",
+    "availableStartDate": "2024-02-01"
+  }
+}

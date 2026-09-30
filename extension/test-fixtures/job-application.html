@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jango Job Agent — Local Application Test</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #fafafa;
+    }
+    .container {
+      background: #fff;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 8px;
+      color: #1a1a1a;
+    }
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 24px;
+      padding: 12px 16px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      border-left: 4px solid #0066cc;
+    }
+    form { display: flex; flex-direction: column; gap: 20px; }
+    .section { border-top: 1px solid #eee; padding-top: 20px; }
+    .section:first-child { border-top: none; padding-top: 0; }
+    .section-title { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #666; margin-bottom: 16px; }
+    .field-group { display: flex; flex-direction: column; gap: 6px; }
+    .field-row { display: flex; gap: 16px; }
+    .field-row .field-group { flex: 1; }
+    label { font-size: 14px; font-weight: 500; color: #333; }
+    .required::after { content: ' *'; color: #c5221f; }
+    input, textarea, select {
+      font-family: inherit;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 10px 12px;
+      width: 100%;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      background: #fff;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #0066cc;
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+    }
+    input[readonly], textarea[readonly], select[readonly] { background: #f5f5f5; }
+    textarea { min-height: 100px; resize: vertical; }
+    .hint { font-size: 12px; color: #888; margin-top: 4px; }
+    .btn-row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 20px; border-radius: 6px; font-size: 14px; font-weight: 500;
+      cursor: pointer; border: none; transition: background 0.15s;
+    }
+    .btn-primary { background: #0066cc; color: #fff; }
+    .btn-primary:hover { background: #0052a3; }
+    .btn-secondary { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
+    .btn-secondary:hover { background: #e0e0e0; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    fieldset { border: 1px solid #eee; border-radius: 8px; padding: 16px; margin: 0; }
+    legend { font-weight: 600; font-size: 14px; padding: 0 8px; color: #333; }
+    .checkbox-group { display: flex; align-items: center; gap: 8px; }
+    .checkbox-group input { width: auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Jango Job Agent — Local Application Test</h1>
+    <div class="note">
+      This page is a local development fixture. No data is submitted.
+    </div>
+
+    <form id="application-form" onsubmit="event.preventDefault(); alert('Form submission blocked — this is a test fixture.');">
+      
+      <fieldset class="section">
+        <legend>Personal Information</legend>
+        
+        <div class="field-row">
+          <div class="field-group">
+            <label for="given-name" class="required">First Name</label>
+            <input
+              type="text"
+              id="given-name"
+              name="firstName"
+              autocomplete="given-name"
+              placeholder="e.g., John"
+              aria-label="First name"
+            />
+          </div>
+          <div class="field-group">
+            <label for="family-name" class="required">Last Name</label>
+            <input
+              type="text"
+              id="family-name"
+              name="lastName"
+              autocomplete="family-name"
+              placeholder="e.g., Doe"
+              aria-label="Last name"
+            />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="applicant-name" class="required">Full Name</label>
+          <input
+            type="text"
+            id="applicant-name"
+            name="fullName"
+            autocomplete="name"
+            placeholder="e.g., John Doe"
+            aria-label="Full legal name"
+          />
+        </div>
+
+        <div class="field-group">
+          <label for="email-address" class="required">Email Address</label>
+          <input
+            type="email"
+            id="email-address"
+            name="email"
+            autocomplete="email"
+            placeholder="john.doe@example.com"
+            aria-label="Email address"
+          />
+        </div>
+
+        <div class="field-group">
+          <label for="phone-number" class="required">Phone Number</label>
+          <input
+            type="tel"
+            id="phone-number"
+            name="phone"
+            autocomplete="tel"
+            placeholder="+1 (555) 123-4567"
+            aria-label="Phone number"
+          />
+        </div>
+      </fieldset>
+
+      <fieldset class="section">
+        <legend>Address</legend>
+        
+        <div class="field-row">
+          <div class="field-group">
+            <label for="city-field" class="required">City</label>
+            <input
+              type="text"
+              id="city-field"
+              name="city"
+              autocomplete="address-level2"
+              placeholder="San Francisco"
+              aria-label="City"
+            />
+          </div>
+          <div class="field-group">
+            <label for="state-field" class="required">State / Province</label>
+            <input
+              type="text"
+              id="state-field"
+              name="state"
+              autocomplete="address-level1"
+              placeholder="CA"
+              aria-label="State or province"
+            />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="country-select" class="required">Country</label>
+            <select id="country-select" name="country" autocomplete="country" aria-label="Country">
+              <option value="">Select country</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="GB">United Kingdom</option>
+              <option value="AU">Australia</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="IN">India</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="zip-code" class="required">ZIP / Postal Code</label>
+            <input
+              type="text"
+              id="zip-code"
+              name="zipCode"
+              autocomplete="postal-code"
+              placeholder="94105"
+              aria-label="ZIP or postal code"
+            />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="section">
+        <legend>Professional Links</legend>
+        
+        <div class="field-group">
+          <label for="linkedin-profile">LinkedIn Profile</label>
+          <input
+            type="url"
+            id="linkedin-profile"
+            name="linkedin"
+            placeholder="https://linkedin.com/in/johndoe"
+            aria-label="LinkedIn profile URL"
+          />
+          <span class="hint">Your public LinkedIn profile URL</span>
+        </div>
+
+        <div class="field-group">
+          <label for="github-profile">GitHub Profile</label>
+          <input
+            type="url"
+            id="github-profile"
+            name="github"
+            placeholder="https://github.com/johndoe"
+            aria-label="GitHub profile URL"
+          />
+          <span class="hint">Your GitHub username or profile URL</span>
+        </div>
+
+        <div class="field-group">
+          <label for="portfolio-url">Portfolio Website</label>
+          <input
+            type="url"
+            id="portfolio-url"
+            name="portfolio"
+            placeholder="https://johndoe.dev"
+            aria-label="Portfolio website URL"
+          />
+          <span class="hint">Personal website, portfolio, or blog</span>
+        </div>
+      </fieldset>
+
+      <fieldset class="section">
+        <legend>Custom Questions</legend>
+        <p class="hint" style="margin: 0 0 16px;">These fields should NOT be auto-filled by the extension.</p>
+        
+        <div class="field-group">
+          <label for="interest-reason" class="required">Why are you interested in this role?</label>
+          <textarea
+            id="interest-reason"
+            name="interestReason"
+            placeholder="Explain your motivation for applying..."
+            aria-label="Why are you interested in this role"
+          ></textarea>
+        </div>
+
+        <div class="field-group">
+          <label for="additional-info">Additional Information</label>
+          <textarea
+            id="additional-info"
+            name="additionalInfo"
+            placeholder="Anything else you'd like us to know..."
+            aria-label="Additional information"
+          ></textarea>
+        </div>
+
+        <div class="field-group">
+          <label for="referral-source">How did you hear about us?</label>
+          <select id="referral-source" name="referralSource" aria-label="Referral source">
+            <option value="">Select one</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="job-board">Job board</option>
+            <option value="referral">Employee referral</option>
+            <option value="company-site">Company website</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="salary-expectation">Salary Expectation (annual)</label>
+          <input
+            type="text"
+            id="salary-expectation"
+            name="salaryExpectation"
+            placeholder="$150,000 - $180,000"
+            aria-label="Salary expectation"
+          />
+        </div>
+      </fieldset>
+
+      <fieldset class="section">
+        <legend>Agreements</legend>
+        
+        <div class="checkbox-group">
+          <input type="checkbox" id="terms-agree" name="termsAgree" required />
+          <label for="terms-agree">I agree to the <a href="#" style="color: #0066cc;">Terms of Service</a> and <a href="#" style="color: #0066cc;">Privacy Policy</a></label>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="marketing-optin" name="marketingOptIn" />
+          <label for="marketing-optin">I'd like to receive updates about future opportunities</label>
+        </div>
+      </fieldset>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary" onclick="this.form.reset();">Reset Form</button>
+        <button type="submit" class="btn btn-primary">Submit Application</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Prevent actual form submission
+    document.getElementById('application-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Form submission blocked — this is a test fixture.');
+      return false;
+    });
+
+    // Log form data for debugging
+    window.logFormData = function() {
+      const form = document.getElementById('application-form');
+      const data = new FormData(form);
+      console.log('Form data:', Object.fromEntries(data.entries()));
+    };
+  </script>
+</body>
+</html>

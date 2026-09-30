@@ -1,0 +1,1 @@
+export type { Profile, ProfileStore } from '../shared/types';

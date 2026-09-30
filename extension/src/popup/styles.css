@@ -1,0 +1,35 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; line-height: 1.5; color: #1a1a1a; background: #fff; }
+button { font-family: inherit; font-size: inherit; cursor: pointer; border: none; background: none; }
+input, textarea, select { font-family: inherit; font-size: inherit; border: 1px solid #ddd; border-radius: 4px; padding: 8px 12px; width: 100%; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: #0066cc; box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2); }
+label { display: block; margin-bottom: 4px; font-weight: 500; color: #333; }
+.container { padding: 16px; max-width: 360px; }
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #eee; }
+.title { font-size: 18px; font-weight: 600; color: #1a1a1a; }
+.section { margin-bottom: 20px; }
+.section-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #666; margin-bottom: 12px; }
+.field-group { margin-bottom: 12px; }
+.field-row { display: flex; gap: 8px; }
+.field-row .field-group { flex: 1; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 6px; font-weight: 500; transition: all 0.15s ease; }
+.btn-primary { background: #0066cc; color: #fff; width: 100%; }
+.btn-primary:hover { background: #0052a3; }
+.btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+.btn-secondary { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
+.btn-secondary:hover { background: #e0e0e0; }
+.status { padding: 10px 12px; border-radius: 6px; font-size: 13px; margin-bottom: 12px; }
+.status-success { background: #e6f4ea; color: #137333; border: 1px solid #ceead6; }
+.status-error { background: #fce8e6; color: #c5221f; border: 1px solid #fad2cf; }
+.status-info { background: #e8f0fe; color: #1967d2; border: 1px solid #d2e3fc; }
+.profile-form { display: flex; flex-direction: column; gap: 12px; }
+.detected-fields { max-height: 200px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 8px; }
+.detected-field { display: flex; justify-content: space-between; align-items: center; padding: 8px; border-radius: 4px; margin-bottom: 4px; font-size: 12px; }
+.detected-field:last-child { margin-bottom: 0; }
+.detected-field.high { background: #e6f4ea; }
+.detected-field.medium { background: #fef7e0; }
+.detected-field.low { background: #fce8e6; }
+.field-info { display: flex; flex-direction: column; gap: 2px; }
+.field-type { font-weight: 500; }
+.field-confidence { font-size: 11px; color: #666; }
+.hidden { display: none !important; }
