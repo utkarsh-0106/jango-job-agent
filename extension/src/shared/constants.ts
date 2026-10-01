@@ -23,9 +23,22 @@ export const FIELD_TYPE_PATTERNS: Record<FieldType, FieldPattern[]> = {
   ],
   FULL_NAME: [
     { type: 'autocomplete', pattern: 'name', weight: 0.9 },
-    { type: 'name', pattern: '^name$|full.?name', weight: 0.8 },
-    { type: 'id', pattern: '^name$|full.?name', weight: 0.7 },
-    { type: 'label', pattern: 'full.?name|name', weight: 0.7 },
+    { type: 'name', pattern: '^name$|full.?name|applicant.?name|candidate.?name', weight: 0.8 },
+    { type: 'id', pattern: '^name$|full.?name|applicant.?name|candidate.?name', weight: 0.7 },
+    { type: 'label', pattern: 'full.?name|applicant.?name|candidate.?name|your.?name|name.?of.?applicant', weight: 0.9 },
+    { type: 'placeholder', pattern: 'full.?name|applicant.?name|candidate.?name|your.?name', weight: 0.8 },
+  ],
+  INSTITUTION: [
+    { type: 'name', pattern: 'college|institution|university|school', weight: 0.9 },
+    { type: 'id', pattern: 'college|institution|university|school', weight: 0.8 },
+    { type: 'label', pattern: 'college|institution|university|school', weight: 0.8 },
+    { type: 'placeholder', pattern: 'college|institution|university|school', weight: 0.7 },
+  ],
+  ROLL_NUMBER: [
+    { type: 'name', pattern: 'roll.?no|roll.?number|university.?roll|uni.?roll', weight: 0.9 },
+    { type: 'id', pattern: 'roll.?no|roll.?number|university.?roll|uni.?roll', weight: 0.8 },
+    { type: 'label', pattern: 'roll.?no|roll.?number|university.?roll|uni.?roll', weight: 0.8 },
+    { type: 'placeholder', pattern: 'roll.?no|roll.?number|university.?roll|uni.?roll', weight: 0.7 },
   ],
   EMAIL: [
     { type: 'type', pattern: 'email', weight: 1.0 },

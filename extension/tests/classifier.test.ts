@@ -84,6 +84,53 @@ describe('RuleBasedClassifier', () => {
     expect(result.confidence).toBeGreaterThan(0.5);
   });
 
+  it('classifies institution fields', () => {
+    const signals = [
+      createSignal('name', 'collegeName'),
+      createSignal('label', 'College Name'),
+    ];
+
+    const result = classifier.classify(signals);
+
+    expect(result.fieldType).toBe('INSTITUTION');
+    expect(result.confidence).toBeGreaterThan(0.5);
+  });
+
+  it('classifies university institution fields', () => {
+    const signals = [
+      createSignal('name', 'university'),
+      createSignal('label', 'University Name'),
+    ];
+
+    const result = classifier.classify(signals);
+
+    expect(result.fieldType).toBe('INSTITUTION');
+    expect(result.confidence).toBeGreaterThan(0.5);
+  });
+
+  it('classifies roll number fields', () => {
+    const signals = [
+      createSignal('name', 'rollNo'),
+      createSignal('label', 'Roll No.'),
+    ];
+
+    const result = classifier.classify(signals);
+
+    expect(result.fieldType).toBe('ROLL_NUMBER');
+    expect(result.confidence).toBeGreaterThan(0.5);
+  });
+
+  it('classifies full name aliases', () => {
+    const signals = [
+      createSignal('label', 'Applicant Name'),
+    ];
+
+    const result = classifier.classify(signals);
+
+    expect(result.fieldType).toBe('FULL_NAME');
+    expect(result.confidence).toBeGreaterThan(0.3);
+  });
+
   it('returns UNKNOWN for unrecognized fields', () => {
     const signals = [
       createSignal('name', 'randomfield123'),

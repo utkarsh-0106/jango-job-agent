@@ -15,6 +15,7 @@ interface FormData {
   links: { linkedin: string; github: string; portfolio: string; website: string };
   education: {
     institution: string;
+    rollNumber: string;
     degree: string;
     field: string;
     startDate: string;
@@ -40,6 +41,7 @@ const INITIAL_FORM: FormData = {
   links: { linkedin: '', github: '', portfolio: '', website: '' },
   education: {
     institution: '',
+    rollNumber: '',
     degree: '',
     field: '',
     startDate: '',
@@ -89,6 +91,7 @@ export function App() {
       links: { linkedin: p.links.linkedin, github: p.links.github, portfolio: p.links.portfolio, website: p.links.website },
       education: {
         institution: p.education[0]?.institution ?? '',
+        rollNumber: p.education[0]?.rollNumber ?? '',
         degree: p.education[0]?.degree ?? '',
         field: p.education[0]?.field ?? '',
         startDate: p.education[0]?.startDate ?? '',
@@ -119,6 +122,7 @@ export function App() {
       education: [
         {
           institution: f.education.institution,
+          rollNumber: f.education.rollNumber,
           degree: f.education.degree,
           field: f.education.field,
           startDate: f.education.startDate,
@@ -358,6 +362,15 @@ export function App() {
               value={form.education.institution}
               onChange={e => setForm({ ...form, education: { ...form.education, institution: e.target.value } })}
               placeholder="University / College"
+            />
+          </div>
+
+          <div className="field-group">
+            <label>Roll Number</label>
+            <input
+              value={form.education.rollNumber}
+              onChange={e => setForm({ ...form, education: { ...form.education, rollNumber: e.target.value } })}
+              placeholder="University Roll Number"
             />
           </div>
 

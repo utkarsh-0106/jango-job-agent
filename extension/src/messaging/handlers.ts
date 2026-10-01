@@ -351,13 +351,13 @@ function detectFieldsInPage(): {
 
   function classify(signals: ClassificationSignal[]): ClassificationResult {
     const typeScores: Record<FieldType, number> = {
-      FIRST_NAME: 0, LAST_NAME: 0, FULL_NAME: 0, EMAIL: 0, PHONE: 0,
+      FIRST_NAME: 0, LAST_NAME: 0, FULL_NAME: 0, INSTITUTION: 0, ROLL_NUMBER: 0, EMAIL: 0, PHONE: 0,
       LINKEDIN: 0, GITHUB: 0, PORTFOLIO: 0, WEBSITE: 0,
       CITY: 0, STATE: 0, COUNTRY: 0, ZIP_CODE: 0, UNKNOWN: 0,
     };
 
     const typeSignals: Record<FieldType, ClassificationSignal[]> = {
-      FIRST_NAME: [], LAST_NAME: [], FULL_NAME: [], EMAIL: [], PHONE: [],
+      FIRST_NAME: [], LAST_NAME: [], FULL_NAME: [], INSTITUTION: [], ROLL_NUMBER: [], EMAIL: [], PHONE: [],
       LINKEDIN: [], GITHUB: [], PORTFOLIO: [], WEBSITE: [],
       CITY: [], STATE: [], COUNTRY: [], ZIP_CODE: [], UNKNOWN: [],
     };
@@ -515,6 +515,8 @@ function autofillInPage(profile: Profile, minConfidence: number = 0.5): Autofill
     | 'FIRST_NAME'
     | 'LAST_NAME'
     | 'FULL_NAME'
+    | 'INSTITUTION'
+    | 'ROLL_NUMBER'
     | 'EMAIL'
     | 'PHONE'
     | 'CITY'
@@ -582,7 +584,9 @@ function autofillInPage(profile: Profile, minConfidence: number = 0.5): Autofill
       ['WEBSITE', /\b(website|web site|personal site)\b/, 0.92],
       ['FIRST_NAME', /\b(first name|given name|forename)\b/, 0.96],
       ['LAST_NAME', /\b(last name|surname|family name)\b/, 0.96],
-      ['FULL_NAME', /\b(full name|your name|candidate name)\b/, 0.94],
+      ['FULL_NAME', /\b(full name|your name|candidate name|applicant name|name of applicant)\b/, 0.94],
+      ['INSTITUTION', /\b(college name|college|institution name|institution|university name|university|school name|school)\b/, 0.94],
+      ['ROLL_NUMBER', /\b(roll no\.?|roll number|university roll no\.?|university roll number|uni roll no\.?|uni roll number)\b/, 0.96],
       ['ZIP_CODE', /\b(zip|zip code|postal code|postcode)\b/, 0.96],
       ['CITY', /\bcity\b/, 0.90],
       ['STATE', /\b(state|province|region)\b/, 0.88],
@@ -608,6 +612,12 @@ function autofillInPage(profile: Profile, minConfidence: number = 0.5): Autofill
       FIRST_NAME: personal.firstName,
       LAST_NAME: personal.lastName,
       FULL_NAME: personal.fullName,
+      INSTITUTION: Array.isArray(data.education)
+        ? (data.education[0] as Record<string, unknown> | undefined)?.institution
+        : undefined,
+      ROLL_NUMBER: Array.isArray(data.education)
+        ? (data.education[0] as Record<string, unknown> | undefined)?.rollNumber
+        : undefined,
       EMAIL: contact.email,
       PHONE: contact.phone,
       CITY: contact.city,

@@ -9,13 +9,13 @@ export interface Classifier {
 export class RuleBasedClassifier implements Classifier {
   classify(signals: ClassificationSignal[]): ClassificationResult {
     const typeScores: Record<FieldType, number> = {
-      FIRST_NAME: 0, LAST_NAME: 0, FULL_NAME: 0, EMAIL: 0, PHONE: 0,
+      FIRST_NAME: 0, LAST_NAME: 0, FULL_NAME: 0, INSTITUTION: 0, ROLL_NUMBER: 0, EMAIL: 0, PHONE: 0,
       LINKEDIN: 0, GITHUB: 0, PORTFOLIO: 0, WEBSITE: 0,
       CITY: 0, STATE: 0, COUNTRY: 0, ZIP_CODE: 0, UNKNOWN: 0,
     };
 
     const typeSignals: Record<FieldType, ClassificationSignal[]> = {
-      FIRST_NAME: [], LAST_NAME: [], FULL_NAME: [], EMAIL: [], PHONE: [],
+      FIRST_NAME: [], LAST_NAME: [], FULL_NAME: [], INSTITUTION: [], ROLL_NUMBER: [], EMAIL: [], PHONE: [],
       LINKEDIN: [], GITHUB: [], PORTFOLIO: [], WEBSITE: [],
       CITY: [], STATE: [], COUNTRY: [], ZIP_CODE: [], UNKNOWN: [],
     };

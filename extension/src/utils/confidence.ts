@@ -31,7 +31,7 @@ export function shouldAutofill(confidence: number, minConfidence: number = CONFI
 export function normalizeFieldType(type: string): FieldType {
   const upper = type.toUpperCase() as FieldType;
   const validTypes: FieldType[] = [
-    'FIRST_NAME', 'LAST_NAME', 'FULL_NAME', 'EMAIL', 'PHONE',
+    'FIRST_NAME', 'LAST_NAME', 'FULL_NAME', 'INSTITUTION', 'ROLL_NUMBER', 'EMAIL', 'PHONE',
     'LINKEDIN', 'GITHUB', 'PORTFOLIO', 'WEBSITE',
     'CITY', 'STATE', 'COUNTRY', 'ZIP_CODE', 'UNKNOWN'
   ];
@@ -43,6 +43,8 @@ export function getFieldValueForType(profile: Record<string, unknown>, fieldType
     FIRST_NAME: ['personal', 'firstName'],
     LAST_NAME: ['personal', 'lastName'],
     FULL_NAME: ['personal', 'fullName'],
+    INSTITUTION: ['education', '0', 'institution'],
+    ROLL_NUMBER: ['education', '0', 'rollNumber'],
     EMAIL: ['contact', 'email'],
     PHONE: ['contact', 'phone'],
     LINKEDIN: ['links', 'linkedin'],

@@ -2,6 +2,8 @@ export type FieldType =
   | 'FIRST_NAME'
   | 'LAST_NAME'
   | 'FULL_NAME'
+  | 'INSTITUTION'
+  | 'ROLL_NUMBER'
   | 'EMAIL'
   | 'PHONE'
   | 'LINKEDIN'
@@ -56,6 +58,7 @@ export interface Profile {
   };
   education: Array<{
     institution: string;
+    rollNumber: string;
     degree: string;
     field: string;
     startDate: string;

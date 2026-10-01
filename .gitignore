@@ -29,3 +29,9 @@ coverage/
 
 # Logs
 *.log
+# BRAG / local demo artifacts
+.agents/
+brag-output/
+compositions/
+hyperframes.lock.json
+skills-lock.json
